@@ -1,0 +1,74 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: cryptoquant-timescaledb
+    environment:
+      POSTGRES_DB: cryptoquant
+      POSTGRES_USER: cryptoquant
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cryptoquant_dev}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cryptoquant"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: cryptoquant-redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.api
+    container_name: cryptoquant-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://cryptoquant:${POSTGRES_PASSWORD:-cryptoquant_dev}@timescaledb:5432/cryptoquant
+      REDIS_URL: redis://redis:6379/0
+      API_HOST: "0.0.0.0"
+      API_PORT: "8000"
+      LOG_LEVEL: INFO
+      CORS_ORIGINS: "http://localhost:3000"
+      ML_MODELS_DIR: /app/ml_models
+      JWT_SECRET: ${JWT_SECRET:-change-this-in-production}
+      TRADING_ENABLED: ${TRADING_ENABLED:-false}
+      ENVIRONMENT: ${ENVIRONMENT:-demo}
+    volumes:
+      - ./backend/ml_models:/app/ml_models
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: cryptoquant-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  timescale_data:
+  redis_data:

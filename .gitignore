@@ -1,0 +1,90 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Database
+*.db
+*.sqlite3
+
+# Docker
+docker-compose.override.yml
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ML model artifacts (not source code)
+*.onnx
+*.pkl
+*.joblib
+/models/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node (frontend)
+node_modules/
+.next/
+out/
+
+# Playwright
+frontend/test-results/
+frontend/playwright-report/
+
+# Claude Code
+CLAUDE.md
+docs/superpowers/
+
+# Windows artifact
+nul
+
+# Misc
+*.bak
+*.tmp
+
+# Screenshots (debug/E2E)
+/*.png
+/*.jpeg
+/*.jpg
+screenshots/
+qa-reports/
+e2e-screenshots/
+Example/
+
+# Playwright MCP temp files
+.playwright-mcp/
+*.output
+
+# Allow docs/images (README screenshots)
+!docs/images/*.png
+DEPLOY.md

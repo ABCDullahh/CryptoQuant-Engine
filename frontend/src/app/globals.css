@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════
+   QUANT OBSIDIAN — CryptoQuant Engine Design System
+   High-density, editorial-grade trading terminal
+   ═══════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Surface Hierarchy (Monolithic Stacking) ── */
+  --color-background: #0D0D0D;
+  --color-surface-dim: #131313;
+  --color-surface: #131313;
+  --color-surface-container-lowest: #0E0E0E;
+  --color-surface-container-low: #1C1B1B;
+  --color-surface-container: #201F1F;
+  --color-surface-container-high: #2A2A2A;
+  --color-surface-container-highest: #353534;
+  --color-surface-bright: #3A3939;
+  --color-surface-variant: #353534;
+
+  /* ── Text ── */
+  --color-on-surface: #E5E2E1;
+  --color-on-surface-variant: #B9CACB;
+  --color-on-background: #E5E2E1;
+  --color-inverse-surface: #E5E2E1;
+  --color-inverse-on-surface: #313030;
+
+  /* ── Primary (Electric Cyan) ── */
+  --color-primary: #DBFCFF;
+  --color-primary-container: #00F0FF;
+  --color-primary-fixed: #7DF4FF;
+  --color-primary-fixed-dim: #00DBE9;
+  --color-on-primary: #00363A;
+  --color-on-primary-fixed: #002022;
+  --color-on-primary-container: #006970;
+  --color-on-primary-fixed-variant: #004F54;
+  --color-inverse-primary: #006970;
+  --color-surface-tint: #00DBE9;
+
+  /* ── Secondary (Emerald — Profit/Long) ── */
+  --color-secondary: #40E56C;
+  --color-secondary-container: #02C953;
+  --color-secondary-fixed: #69FF87;
+  --color-secondary-fixed-dim: #3CE36A;
+  --color-on-secondary: #003912;
+  --color-on-secondary-fixed: #002108;
+  --color-on-secondary-container: #004D1B;
+  --color-on-secondary-fixed-variant: #00531E;
+
+  /* ── Error (Rose — Loss/Short) ── */
+  --color-error: #FFB4AB;
+  --color-error-container: #93000A;
+  --color-on-error: #690005;
+  --color-on-error-container: #FFDAD6;
+
+  /* ── Tertiary (Warning/Alert) ── */
+  --color-tertiary: #FFF3F2;
+  --color-tertiary-container: #FFCDCE;
+  --color-tertiary-fixed: #FFDADA;
+  --color-tertiary-fixed-dim: #FFB3B6;
+  --color-on-tertiary: #68001A;
+  --color-on-tertiary-fixed: #40000C;
+  --color-on-tertiary-container: #BF0037;
+  --color-on-tertiary-fixed-variant: #920028;
+
+  /* ── Outline ── */
+  --color-outline: #849495;
+  --color-outline-variant: #3B494B;
+
+  /* ── Trading Colors (semantic aliases) ── */
+  --color-long: #40E56C;
+  --color-long-bg: rgba(64, 229, 108, 0.10);
+  --color-short: #FFB4AB;
+  --color-short-bg: rgba(255, 180, 171, 0.10);
+
+  /* ── Grade Colors ── */
+  --color-grade-a: #00F0FF;
+  --color-grade-b: #40E56C;
+  --color-grade-c: #FFB3B6;
+  --color-grade-d: #849495;
+
+  /* ── Fonts (loaded via next/font in layout.tsx) ── */
+  --font-headline: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-label: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+
+  /* ── Radius (Engine aesthetic — sharp corners) ── */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  min-height: 100vh;
+}
+
+/* ── Scrollbar (Obsidian Terminal) ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--color-background); }
+::-webkit-scrollbar-thumb { background: var(--color-surface-container-highest); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-outline-variant); }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Selection ── */
+::selection {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-fixed);
+}
+
+/* ── Font Utilities ── */
+.font-headline { font-family: var(--font-headline); }
+.font-mono { font-family: var(--font-mono); }
+
+/* ── Structural Glass (for modals/dropdowns only) ── */
+.glass-bg {
+  background: linear-gradient(135deg, rgba(32, 31, 31, 0.8) 0%, rgba(22, 22, 22, 0.9) 100%);
+  backdrop-filter: blur(20px);
+}
+
+/* ── Ghost Border Container ── */
+.ghost-card {
+  background: var(--color-surface-container-low);
+  border: 1px solid rgba(59, 73, 75, 0.10);
+}
+
+.ghost-card:hover {
+  border-color: rgba(0, 240, 255, 0.08);
+}
+
+/* ── Input Focus Effect ── */
+.input-focus-effect:focus-within {
+  border-bottom: 1px solid var(--color-primary-container);
+}
+
+/* ── Chart Grid Background ── */
+.chart-grid {
+  background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Data Pulse Animation ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+/* ── Stagger children ── */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* ── Number Tabular ── */
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* ── PnL Colors ── */
+.pnl-positive { color: var(--color-long); }
+.pnl-negative { color: var(--color-short); }
+
+/* ── PnL Pulse (Positions page) ── */
+@keyframes pnl-pulse {
+  0% { opacity: 1; }
+  25% { opacity: 0.6; }
+  50% { opacity: 1; }
+  75% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+.pnl-pulse { animation: pnl-pulse 0.6s ease-in-out; }
