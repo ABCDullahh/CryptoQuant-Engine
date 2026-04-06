@@ -2,13 +2,20 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Public paths — no auth required
+  if (pathname === "/" || pathname === "/landing") {
+    return NextResponse.next();
+  }
+
   const token =
     request.cookies.get("token")?.value ||
     request.headers.get("authorization")?.replace("Bearer ", "");
 
   if (!token) {
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("redirect", request.nextUrl.pathname);
+    loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -25,6 +32,6 @@ export const config = {
      * - /health (health check)
      * - Static files (favicon, images, etc.)
      */
-    "/((?!login|landing|api|_next|health|docs|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!login|api|_next|health|docs|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

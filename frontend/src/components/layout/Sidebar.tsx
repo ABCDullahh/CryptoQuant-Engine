@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 const MAIN_NAV = [
-  { href: "/", label: "Overview", icon: LayoutDashboard },
+  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/signals", label: "Signals", icon: Activity },
   { href: "/bot", label: "Bot Manager", icon: Bot },
   { href: "/positions", label: "Positions", icon: Wallet },

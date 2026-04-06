@@ -35,7 +35,7 @@ export default function NotFound() {
         </p>
 
         <Link
-          href="/"
+          href="/dashboard"
           className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium rounded-sm transition-colors"
           style={{
             backgroundColor: "#00F0FF",

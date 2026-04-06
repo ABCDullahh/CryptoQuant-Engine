@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import AuthGuard from "./AuthGuard";
 
-const PUBLIC_PATHS = ["/login", "/landing"];
+const PUBLIC_PATHS = ["/", "/login", "/landing"];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -39,7 +39,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 function MobileNav() {
   const pathname = usePathname();
   const items = [
-    { href: "/", label: "Home", icon: "LayoutDashboard" },
+    { href: "/dashboard", label: "Home", icon: "LayoutDashboard" },
     { href: "/analytics", label: "Analytics", icon: "LineChart" },
     { href: "/wallet", label: "Wallet", icon: "Landmark" },
     { href: "/settings", label: "Settings", icon: "Settings" },
