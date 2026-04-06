@@ -687,7 +687,7 @@ function StepMonitoring({ isActive }: { isActive: boolean }) {
           <div className="w-1.5 h-1.5 rounded-full bg-[#40E56C]/40" />
           <div className="flex-1 flex justify-center">
             <div className="bg-[#1C1B1B] px-3 py-0.5 rounded-sm text-[8px] font-mono text-[#B9CACB]/30">
-              localhost:3000/dashboard
+              cqtrade.abcdullahh.com
             </div>
           </div>
         </div>

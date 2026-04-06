@@ -358,7 +358,7 @@ export default function Hero() {
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="bg-[#1C1B1B] px-4 py-1 rounded-sm text-[10px] font-mono text-[#B9CACB]/40">
-                  localhost:3000/dashboard
+                  cqtrade.abcdullahh.com
                 </div>
               </div>
             </div>
