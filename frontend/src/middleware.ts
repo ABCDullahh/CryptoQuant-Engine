@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public paths — no auth required
-  if (pathname === "/" || pathname === "/landing") {
+  if (pathname === "/") {
     return NextResponse.next();
   }
 

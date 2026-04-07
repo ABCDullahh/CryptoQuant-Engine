@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import AuthGuard from "./AuthGuard";
 
-const PUBLIC_PATHS = ["/", "/login", "/landing"];
+const PUBLIC_PATHS = ["/", "/login"];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
